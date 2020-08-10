@@ -1,0 +1,23 @@
+:root {
+  --bg-main: #202a51;
+  --text-main: #dbdbdb;
+}
+body {
+  background: var(--bg-main);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.searchbox {
+  border: none;
+  border-bottom: thin solid #fff;
+  background: transparent;
+  color: var(--text-main);
+  width: 80%;
+  height: 2rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}

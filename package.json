@@ -1,0 +1,13 @@
+{
+  "name": "emoji-picker",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "tauri dev"
+  },
+  "dependencies": {
+    "tauri": "^0.11.1"
+  }
+}
