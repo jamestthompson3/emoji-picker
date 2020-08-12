@@ -1,6 +1,7 @@
 :root {
   --bg-main: #202a51;
   --text-main: #dbdbdb;
+  --baseline: 1rem;
 }
 body {
   background: var(--bg-main);
@@ -17,7 +18,31 @@ body {
   background: transparent;
   color: var(--text-main);
   width: 80%;
-  height: 2rem;
+  height: calc(var(--baseline) * 2);
   padding: 0.5rem 1rem;
   text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.center {
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.w50 {
+  width: 50vw;
+}
+
+.pb {
+  padding: var(--baseline);
 }
