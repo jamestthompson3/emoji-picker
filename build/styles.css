@@ -14,13 +14,14 @@ body {
 
 .searchbox {
   border: none;
-  border-bottom: thin solid #fff;
-  background: transparent;
   color: var(--text-main);
+  box-shadow: 3px 9px 11px 3px #1b2537;
   width: 80%;
   height: calc(var(--baseline) * 2);
   padding: 0.5rem 1rem;
   text-align: center;
+  background: #020202;
+  border-radius: 5px;
 }
 
 .flex {
