@@ -4,59 +4,25 @@
 )]
 
 mod cmd;
-use serde::{Deserialize, Serialize};
-use serde_json::{Result, Value};
-use std::collections::HashMap;
+mod data;
+mod events;
+use directories::ProjectDirs;
 use std::env;
-use std::fs::File;
-use std::io::BufReader;
-
-#[derive(Serialize, Deserialize)]
-struct Emoji {
-    keywords: Vec<String>,
-    char: String,
-    fitzpatrick_scale: bool,
-    category: String,
-}
+//use std::fs::File;
 
 fn main() {
+    // Linux:   /home/alice/.local/share/emojipicker
+    // Windows: C:\Users\Alice\AppData\Roaming\Emoji Picker\emojipicker\data
+    // macOS:   /Users/Alice/Library/Application Support/emojipicker
+    let project_dirs = ProjectDirs::from("com", "Emoji Picker", "emojipicker").unwrap();
+    let data_dir = project_dirs.data_dir();
+    println!("{:?}", data_dir);
     tauri::AppBuilder::new()
         .setup(move |webview, _| {
-            let mut handle = webview.as_mut();
-            let file = File::open(String::from("../build/emoji.json")).unwrap();
-            let reader = BufReader::new(file);
-            let emoji_list: HashMap<String, Emoji> = serde_json::from_reader(reader).unwrap();
             let curr_dir = env::current_dir().unwrap();
-            println!("\x1b[38;5;206m\n{:?}\n\x1b[0m", curr_dir.display());
-            tauri::event::listen("search".to_string(), move |data| match data {
-                Some(search_term) => {
-                    let found_emoji = emoji_list.get(&search_term);
-                    match found_emoji {
-                        Some(emoji) => {
-                            let char = &emoji.char;
-                            println!("Sending: {}", char);
-                            tauri::event::emit(&mut handle, "result".to_string(), Some(char))
-                                .unwrap();
-                        }
-                        None => {
-                            for emoji in emoji_list.values() {
-                                if emoji.keywords.contains(&search_term)
-                                    || emoji.category == search_term
-                                {
-                                    println!("Sending: {}", &emoji.char);
-                                    tauri::event::emit(
-                                        &mut handle,
-                                        "result".to_string(),
-                                        Some(&emoji.char),
-                                    )
-                                    .unwrap();
-                                }
-                            }
-                        }
-                    }
-                }
-                None => {}
-            });
+            // println!("\x1b[38;5;206m\n{:?}\n\x1b[0m", curr_dir.display());
+            events::listen_for_search(webview.as_mut());
+            events::listen_for_selection(webview.as_mut());
         })
         .build()
         .run();

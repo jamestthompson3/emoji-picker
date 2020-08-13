@@ -47,3 +47,24 @@ body {
 .pb {
   padding: var(--baseline);
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+/* TODO figure out why this paints so poorly :( */
+/* .focus-ring:active { */
+/*   filter: drop-shadow(0px 0px 11px pink); */
+/* } */
+
+/* .focus-ring:not(:active) { */
+/*   transition: filter 400ms ease-in; */
+/* } */
+
+
+.focus-ring:active {
+  outline-color: pink;
+  outline-style: dotted;
+  outline-width: 2px;
+  outline-offset: 4px;
+}

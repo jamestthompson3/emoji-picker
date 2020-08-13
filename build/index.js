@@ -8,17 +8,19 @@ import debounce from "./debounce.js";
   let previousSearch;
   const search = ({ target: { value } }) => {
     if (value !== previousSearch) {
-      console.log("no prev value: ", previousSearch, value);
       tauri.event.emit("search", value);
       previousSearch = value;
     }
   };
   inputBox.onkeyup = debounce(search, 250);
+
   inputBox.focus();
 
   function appendResult({ payload }) {
     const emojiContainer = document.createElement("p");
     emojiContainer.textContent = payload;
+    emojiContainer.onclick = () => tauri.event.emit("select", payload);
+    emojiContainer.classList.add("pointer", "focus-ring");
     resultsBox.appendChild(emojiContainer);
   }
 })();
