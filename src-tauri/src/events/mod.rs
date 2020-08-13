@@ -35,7 +35,7 @@ pub fn listen_for_search(mut handle: tauri::WebviewMut) {
     });
 }
 
-pub fn listen_for_selection(handle: tauri::WebviewMut) {
+pub fn listen_for_selection() {
     tauri::event::listen("select".to_string(), move |data| match data {
         Some(selected) => {
             let mut ctx = ClipboardContext::new().unwrap();

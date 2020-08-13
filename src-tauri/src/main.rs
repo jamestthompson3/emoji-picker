@@ -19,10 +19,10 @@ fn main() {
     println!("{:?}", data_dir);
     tauri::AppBuilder::new()
         .setup(move |webview, _| {
-            let curr_dir = env::current_dir().unwrap();
+            // let curr_dir = env::current_dir().unwrap();
             // println!("\x1b[38;5;206m\n{:?}\n\x1b[0m", curr_dir.display());
             events::listen_for_search(webview.as_mut());
-            events::listen_for_selection(webview.as_mut());
+            events::listen_for_selection();
         })
         .build()
         .run();
