@@ -1,31 +1,64 @@
 :root {
-  --bg-main: #202a51;
-  --text-main: #dbdbdb;
+  --text-main: hsl(223, 15%, 66%);
+  --text-secondary: hsl(223, 15%, 99%);
   --baseline: 1rem;
+  --main-bg: linear-gradient(hsl(240, 4%, 34%), hsl(240, 6%, 24%), hsl(240, 8%, 14%));
 }
 body {
-  background: var(--bg-main);
-  padding: 3rem;
+  background: var(--main-bg);
+  padding: 2rem;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
+  height: 100%;
+  background-repeat: no-repeat;
+  justify-content: flex-start;
+}
+
+html {
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+h2 {
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin: 0px;
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 2.5rem;
+  line-height: 2rem;
+  padding: 0.5rem;
 }
 
 .searchbox {
   border: none;
   color: var(--text-main);
-  box-shadow: 3px 9px 11px 3px #1b2537;
+  box-shadow: 0px 9px 8px 0px hsl(240, 14%, 26%);
   width: 80%;
   height: calc(var(--baseline) * 2);
   padding: 0.5rem 1rem;
   text-align: center;
-  background: #020202;
+  background: #191919;
   border-radius: 5px;
 }
 
 .flex {
   display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.center-all {
+  align-content: center;
+  justify-content: center;
 }
 
 .wrap {
@@ -36,20 +69,28 @@ body {
   align-items: center;
 }
 
-.space-between {
-  justify-content: space-between;
-}
-
-.w50 {
-  width: 50vw;
+.space-evenly {
+  justify-content: space-evenly;
 }
 
 .pb {
   padding: var(--baseline);
 }
 
+.pb2 {
+  padding: calc(var(--baseline) * 2);
+}
+
 .pointer {
   cursor: pointer;
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.center-text {
+  text-align: center;
 }
 
 /* TODO figure out why this paints so poorly :( */

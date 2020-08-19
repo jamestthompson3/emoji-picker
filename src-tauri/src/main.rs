@@ -6,21 +6,28 @@
 mod cmd;
 mod data;
 mod events;
-use directories::ProjectDirs;
-use std::env;
-//use std::fs::File;
+use std::fs;
+use std::io::ErrorKind;
+use std::path::Path;
 
 fn main() {
-    // Linux:   /home/alice/.local/share/emojipicker
-    // Windows: C:\Users\Alice\AppData\Roaming\Emoji Picker\emojipicker\data
-    // macOS:   /Users/Alice/Library/Application Support/emojipicker
-    let project_dirs = ProjectDirs::from("com", "Emoji Picker", "emojipicker").unwrap();
-    let data_dir = project_dirs.data_dir();
+    let data_dir = data::get_data_dir();
+    let mru_file = data::get_mru_file();
+    match fs::create_dir(&data_dir) {
+        Ok(()) => {}
+        Err(e) => match e.kind() {
+            ErrorKind::AlreadyExists => {}
+            _ => panic!("Cannot create data dir"),
+        },
+    }
+    let mru = Path::new(&mru_file);
+    if !mru.exists() {
+        fs::write(mru, b"{\"recent\": []}").unwrap();
+    }
     println!("{:?}", data_dir);
     tauri::AppBuilder::new()
         .setup(move |webview, _| {
-            let curr_dir = env::current_dir().unwrap();
-            println!("\x1b[38;5;206m\n{:?}\n\x1b[0m", curr_dir.display());
+            events::send_init(webview.as_mut());
             events::listen_for_search(webview.as_mut());
             events::listen_for_selection();
         })
