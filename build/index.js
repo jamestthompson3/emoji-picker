@@ -13,7 +13,7 @@ import debounce from "./debounce.js";
       previousSearch = value;
     }
   };
-  inputBox.onkeyup = debounce(search, 250);
+  inputBox.onkeyup = debounce(search, 200);
 
   inputBox.focus();
 

@@ -1,15 +1,26 @@
+@font-face {
+ font-family: "Ubuntu";
+ src: url("Ubuntu-Regular.ttf")
+}
 :root {
   --text-main: hsl(223, 15%, 66%);
   --text-secondary: hsl(223, 15%, 99%);
   --baseline: 1rem;
-  --main-bg: linear-gradient(hsl(240, 4%, 34%), hsl(240, 6%, 24%), hsl(240, 8%, 14%));
+/* CSS HSL */
+--rich-black-fogra-29: hsla(211, 53%, 11%, 1);
+--oxford-blue: hsla(219, 37%, 17%, 1);
+--bdazzled-blue: hsla(212, 29%, 36%, 1);
+--shadow-blue: hsla(214, 23%, 56%, 1);
+--platinum: hsla(75, 6%, 87%, 1);
+
 }
 body {
-  background: var(--main-bg);
+  background: linear-gradient(var(--rich-black-fogra-29), var(--oxford-blue));
   padding: 2rem;
   overflow: scroll;
   display: flex;
   flex-direction: column;
+  font-family: "Ubuntu", sans-serif;
   align-items: center;
   height: 100%;
   background-repeat: no-repeat;
@@ -38,13 +49,15 @@ p {
 
 .searchbox {
   border: none;
-  color: var(--text-main);
-  box-shadow: 0px 9px 8px 0px hsl(240, 14%, 26%);
+  color: var(--platinum);
+  box-shadow: 0px 9px 8px 0px var(--oxford-blue);
+  font-family: "Ubuntu", sans-serif;
   width: 80%;
   height: calc(var(--baseline) * 2);
+  min-height: 32px;
   padding: 0.5rem 1rem;
   text-align: center;
-  background: #191919;
+  background: var(--bdazzled-blue);
   border-radius: 5px;
 }
 
