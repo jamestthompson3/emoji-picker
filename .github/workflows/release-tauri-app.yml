@@ -28,8 +28,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.0
       - run: yarn
-      - name: install tauir bundler
-      - run: cargo install tauri-bundler --force
+      - name: install tauri bundler
+        run: cargo install tauri-bundler --force
       - name: build tauri app
         run: yarn tauri build
 
