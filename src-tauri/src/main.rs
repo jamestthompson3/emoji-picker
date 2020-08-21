@@ -13,18 +13,17 @@ use std::path::Path;
 fn main() {
     let data_dir = data::get_data_dir();
     let mru_file = data::get_mru_file();
-    match fs::create_dir(&data_dir) {
+    match fs::create_dir_all(&data_dir) {
         Ok(()) => {}
         Err(e) => match e.kind() {
             ErrorKind::AlreadyExists => {}
-            _ => panic!("Cannot create data dir"),
+            e => panic!("Cannot create data dir: {:?}", e),
         },
     }
     let mru = Path::new(&mru_file);
     if !mru.exists() {
         fs::write(mru, b"{\"recent\": []}").unwrap();
     }
-    println!("{:?}", data_dir);
     tauri::AppBuilder::new()
         .setup(move |webview, _| {
             events::send_init(webview.as_mut());
