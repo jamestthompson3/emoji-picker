@@ -5,7 +5,7 @@ creating a simple emoji picker with tauri
 
 ## Installation
 
-You can build from source by cloning this repository and running the following:
+To build from source, you need the `tauri-bundler` crate installed and in your $PATH. You can build from source by cloning this repository and running the following:
 
 ```bash
 yarn && yarn tauri build
