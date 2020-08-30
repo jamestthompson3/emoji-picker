@@ -80,7 +80,7 @@ jobs:
             compressed: .tgz
           - platform: windows-latest
             buildFolder: bundle/msi
-            ext: .x64.msi
+            ext: _0.1.0_x64.msi
             compressed: ''
 
     steps:
