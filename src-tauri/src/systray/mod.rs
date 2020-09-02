@@ -1,6 +1,8 @@
+#![cfg]
 use std::process::Command;
 use systray;
 
+#[cfg(target_os = "linux")]
 pub fn run_in_tray() -> Result<(), systray::Error> {
     let mut app;
     match systray::Application::new() {
