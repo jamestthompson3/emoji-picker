@@ -127,10 +127,6 @@ jobs:
           asset_content_type: application/zip
       - name: build tauri app in debug mode
         run: yarn tauri build --debug
-      - name: compress (macos only)
-        if: matrix.platform == 'macos-latest'
-        working-directory: ${{ format('./src-tauri/target/debug/{0}', matrix.buildFolder ) }}
-        run: tar -czf ${{ format('emoji-picker{0}{1}', matrix.ext, matrix.compressed ) }} ${{ format('emoji-picker{0}', matrix.ext ) }}
       - name: upload release asset with debug mode on
         id: upload-release-asset-debug-mode
         uses: actions/upload-release-asset@v1.0.2
